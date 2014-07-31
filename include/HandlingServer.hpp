@@ -1,7 +1,7 @@
 #ifndef HANDLINGSERVER_H
 #define HANDLINGSERVER_H
 
-#include <BlockingServer.hpp>
+#include <kuros.h>
 
 
 class HandlingServer : public BlockingServer

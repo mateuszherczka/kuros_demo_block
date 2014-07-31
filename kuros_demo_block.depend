@@ -1,23 +1,24 @@
 # depslib dependency file v1.0
-1406729333 source:/home/mh/dev/kuros_demo_block/src/blocking_main.cpp
+1406796596 source:/home/mh/dev/kuros_demo_block/src/blocking_main.cpp
 	<iostream>
 	<boost/format.hpp>
 	<kuros.h>
 	<HandlingServer.hpp>
 	<DataFile.hpp>
 
-1406364885 /home/mh/dev/kuros/include/kuros.h
+1406795221 /home/mh/dev/kuros/include/kuros.h
 	<constants.hpp>
 	<types.hpp>
 	<Server.hpp>
+	<BlockingServer.hpp>
 
-1406729160 /home/mh/dev/kuros/include/constants.hpp
+1406793857 /home/mh/dev/kuros/include/constants.hpp
 
 1406206813 /home/mh/dev/kuros/include/types.hpp
 	<vector>
 	<iostream>
 
-1406728059 /home/mh/dev/kuros/include/Server.hpp
+1406797069 /home/mh/dev/kuros/include/Server.hpp
 	<iostream>
 	<istream>
 	<ostream>
@@ -72,10 +73,10 @@
 	<boost/asio.hpp>
 	<boost/lexical_cast.hpp>
 
-1406730159 /home/mh/dev/kuros_demo_block/include/HandlingServer.hpp
-	<BlockingServer.hpp>
+1406795257 /home/mh/dev/kuros_demo_block/include/HandlingServer.hpp
+	<kuros.h>
 
-1406727494 /home/mh/dev/kuros/include/BlockingServer.hpp
+1406796258 /home/mh/dev/kuros/include/BlockingServer.hpp
 	<Server.hpp>
 	<boost/thread.hpp>
 
@@ -88,4 +89,7 @@
 	<boost/lexical_cast.hpp>
 	<constants.hpp>
 	<types.hpp>
+
+1406730661 source:/home/mh/dev/kuros_demo_block/src/HandlingServer.cpp
+	"HandlingServer.hpp"
 
