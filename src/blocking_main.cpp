@@ -57,7 +57,7 @@ int main()
     boost::this_thread::sleep( boost::posix_time::milliseconds(1000));
 
     // Lets keep sending trajectories over and over until user quits
-    for (;;)
+    while (aserver.isConnected())
     {
 
         cout << "Sending (blocking) trajectory with " << trajectory.size() << " frames." << endl;
