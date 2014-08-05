@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1406899139 source:/home/mh/dev/kuros_demo_block/src/blocking_main.cpp
+1407246764 source:/home/mh/dev/kuros_demo_block/src/blocking_main.cpp
 	<iostream>
 	<boost/format.hpp>
 	<kuros.h>
@@ -18,23 +18,22 @@
 	<vector>
 	<iostream>
 
-1406899253 /home/mh/dev/kuros/include/Server.hpp
+1407245074 /home/mh/dev/kuros/include/Server.hpp
 	<iostream>
 	<istream>
 	<ostream>
 	<string>
+	<mutex>
+	<atomic>
 	<boost/asio.hpp>
 	<boost/thread.hpp>
-	<boost/thread/mutex.hpp>
-	<boost/thread/locks.hpp>
-	<boost/thread/lock_guard.hpp>
 	<ThreadSafeQueue.hpp>
 	<types.hpp>
 	<ServerConfig.hpp>
 	<KukaResponse.hpp>
 	<KukaCommand.hpp>
 
-1406896371 /home/mh/dev/kuros/include/ThreadSafeQueue.hpp
+1407253309 /home/mh/dev/kuros/include/ThreadSafeQueue.hpp
 	<mutex>
 	<condition_variable>
 	<queue>
@@ -80,9 +79,10 @@
 1406795257 /home/mh/dev/kuros_demo_block/include/HandlingServer.hpp
 	<kuros.h>
 
-1406901816 /home/mh/dev/kuros/include/BlockingServer.hpp
+1407244728 /home/mh/dev/kuros/include/BlockingServer.hpp
 	<Server.hpp>
 	<boost/thread.hpp>
+	<mutex>
 
 1406536170 /home/mh/dev/kuros/include/DataFile.hpp
 	<iostream>

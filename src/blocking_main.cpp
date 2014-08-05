@@ -57,19 +57,23 @@ int main()
     boost::this_thread::sleep( boost::posix_time::milliseconds(1000));
 
     // Lets keep sending trajectories over and over until user quits
-    while (aserver.isConnected())
+    while (aserver.isAccepting())
     {
 
+        /*
         cout << "Sending (blocking) trajectory with " << trajectory.size() << " frames." << endl;
         aserver.blockSendTrajectory(info, trajectory);  // blockSendTrajectory() blocks
 
         cout << "Done, continue." << endl;
+        */
 
         cout << "Sending (blocking) sampled trajectory with " << pointSampleTrajectory.size() << " frames." << endl;
         ++info[KUKA_TRAJID];
         aserver.blockSendTrajectory(info, pointSampleTrajectory);
 
         cout << "Done, continue." << endl;
+
+        /*
 
         cout << "Sending (blocking) pose." << endl;
 
@@ -95,6 +99,9 @@ int main()
         pose[0] = trajectory[30];
         aserver.blockSendTrajectory(info, pose);
 
+
+
+
         cout << "Done, Sending (blocking) next pose." << endl;
 
         ++info[KUKA_TRAJID];
@@ -104,8 +111,14 @@ int main()
         // since we loop, clear the pose vector
         pose.clear();
 
+        */
+
         cout << "Done. Looping." << endl;
     }
+
+    cout << "Loop ended because server no longer connected." << endl;
+    boost::this_thread::sleep( boost::posix_time::milliseconds(1000));
+    cout << "Main thread exiting." << endl;
 
     return 0;
 }
