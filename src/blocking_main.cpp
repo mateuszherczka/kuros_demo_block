@@ -117,6 +117,7 @@ int main()
     }
 
     cout << "Loop ended because server no longer connected." << endl;
+
     boost::this_thread::sleep( boost::posix_time::milliseconds(1000));
     cout << "Main thread exiting." << endl;
 
