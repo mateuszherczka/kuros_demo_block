@@ -1,6 +1,6 @@
 #include "HandlingServer.hpp"
 
-HandlingServer::HandlingServer()
+HandlingServer::HandlingServer() : handledCount(0)
 {
     //ctor
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <boost/format.hpp>
+#include <boost/thread.hpp>
 
 #include <kuros.h>
 #include <HandlingServer.hpp>
@@ -36,16 +37,14 @@ int main()
     aserver.startListening();   // blocks until connection
 
     cout << "Waiting a little." << endl;
-    std::this_thread::sleep_for( std::chrono::milliseconds(1000) );
+    boost::this_thread::sleep(boost::posix_time::milliseconds(1000));
+
 
     while (aserver.isAccepting())
     {
         // Lets keep sending trajectories over and over until user quits
 
         // ------------------------------------------------------------------------------------
-
-        // this is the KTH home position, we will use it a couple times
-        frame_vec homepos {0, 530, 730, -90, 45, 180};
 
         /*
         A frame_vec is std::vector<double>.
@@ -54,19 +53,35 @@ int main()
         Make sure frames and trajectories are valid, otherwise lord knows what will happen.
         */
 
+        // this is the KTH home position, we will use it a couple times
+        const double homearr[KUKA_FRAME_SIZE] = {0, 530, 730, -90, 45, 180};
+        frame_vec homepos (homearr, homearr + KUKA_FRAME_SIZE );
+
         // empty trajectory vector
         trajectory_vec trajectory;
 
-        // append a point
-        trajectory.push_back(frame_vec {86.603, 650, 555.56, -90, 0, 180});
+        // create and append a point
+        frame_vec apoint(KUKA_FRAME_SIZE);
+        apoint[KUKA_FRAME_X] = 86.603;
+        apoint[KUKA_FRAME_Y] = 650;
+        apoint[KUKA_FRAME_Z] = 555.56;
+        apoint[KUKA_FRAME_A] = -90;
+        apoint[KUKA_FRAME_B] = 0;
+        apoint[KUKA_FRAME_C] = 180;
+        trajectory.push_back(apoint);
 
         // another point from array using frame_vec assign constructor
-    double anarray[KUKA_FRAME_SIZE] = {50, 513.4, 605.56, -90, 0, 180};
-    trajectory.emplace_back(anarray, anarray+KUKA_FRAME_SIZE);
+        double anarray[KUKA_FRAME_SIZE] = {50, 513.4, 605.56, -90, 0, 180};
+        trajectory.push_back(frame_vec(anarray, anarray+KUKA_FRAME_SIZE));
 
-        // third point using frame_vec assign constructor and iterator
-    frame_vec apoint {-100, 600, 650, -90, 0, 180};
-    trajectory.emplace_back(apoint.begin(),apoint.end());
+        // third point reusing array
+        anarray[KUKA_FRAME_X] = -100;
+        anarray[KUKA_FRAME_Y] = 600;
+        anarray[KUKA_FRAME_Z] = 650;
+        anarray[KUKA_FRAME_A] = -90;
+        anarray[KUKA_FRAME_B] = 0;
+        anarray[KUKA_FRAME_C] = 180;
+        trajectory.push_back(frame_vec(anarray, anarray+KUKA_FRAME_SIZE));
 
         // final point - back home
         trajectory.push_back(homepos);
@@ -94,7 +109,13 @@ int main()
         ++info[KUKA_TRAJID];
 
         trajectory_vec pose;
-        pose.push_back(frame_vec {50, 686.6, 694.44, -90, 0, 180});
+        anarray[KUKA_FRAME_X] = 50;
+        anarray[KUKA_FRAME_Y] = 686.6;
+        anarray[KUKA_FRAME_Z] = 694.44;
+        anarray[KUKA_FRAME_A] = -90;
+        anarray[KUKA_FRAME_B] = 0;
+        anarray[KUKA_FRAME_C] = 180;
+        pose.push_back(frame_vec(anarray, anarray+KUKA_FRAME_SIZE));
 
         cout << "Sending (blocking)  pose with " << pose.size() << " frames." << endl;
         aserver.blockSendTrajectory(info, pose);
@@ -117,8 +138,7 @@ int main()
 
     cout << "Loop ended because server no longer connected." << endl;
 
-
-    std::this_thread::sleep_for( std::chrono::milliseconds(1000) );
+    boost::this_thread::sleep(boost::posix_time::milliseconds(1000));
     cout << "Main thread exiting." << endl;
 
     return 0;
